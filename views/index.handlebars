@@ -1,0 +1,41 @@
+<section class="app">
+    <header>
+        <h1>ATX Burgers</h1>
+    </header>
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>Burgers</li>
+            <li>Restaurants</li>
+            <li>About</li>
+        </ul>
+    </nav>
+    <section class="add-items">
+        <div class="burger">
+            <form action="/api/buger" id="add-burger-form">
+                <div class="form-input">
+                    <input type="text" />
+                </div>
+                <div class="form-input">
+                    <select id="restaurant-select"></select>
+                </div>
+                <button type="submit">Add Burger</button>
+            </form>
+        </div>
+        <div class="restaurant">
+            <form action="/api/restaurant" id="add-restaurant-form">
+                <input type="text" />
+                <button type="submit">Add Restaurant</button>
+            </form>
+        </div>
+    </section>
+    <h2>Current Burger List</h2>
+    {{#each burgers}}
+    <div class="burger">
+        <h3>{{ burger_name }} at {{ restaurant_name }}</h3>
+        <p>{{ address }}</p>
+        <button class="devour-burger" id="{{ burger_id }}" {{#if devoured }}disabled{{/if}}>Devour it!</button>
+        <br />
+    </div>
+    {{/each}}
+</section>
