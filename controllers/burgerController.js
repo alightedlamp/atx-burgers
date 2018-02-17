@@ -5,15 +5,19 @@ const burger = require('../models/burger.js');
 // Create all our routes and set up logic within those routes where required.
 router.get('/', (req, res) =>
   burger
-    .join('burgers', 'restaurant')
-    .then(data => res.render('index', { burgers: data }))
+    .join('burger', 'restaurant')
+    .then(data => {
+      res.render('index', { burgers: data });
+    })
     .catch(err => res.status(503).send('Error'))
 );
-
+router.get('/api/all', (req, res) =>
+  burger.join('burger', 'restaurant').then(data => res.json(data))
+);
 router.get('/api/:type', (req, res) =>
   burger
     .all(req.params.type)
-    .then(data => res.render('index', { burgers: data }))
+    .then(data => res.json(data))
     .catch(err => res.status(503).send('Error'))
 );
 router.post('/api/:type', (req, res) =>

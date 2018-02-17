@@ -11,31 +11,44 @@
         </ul>
     </nav>
     <section class="add-items">
-        <div class="burger">
-            <form action="/api/buger" id="add-burger-form">
+        <div class="form burger">
+            <form id="add-burger-form">
                 <div class="form-input">
-                    <input type="text" />
+                    <input name="name" type="text" />
                 </div>
                 <div class="form-input">
-                    <select id="restaurant-select"></select>
+                    <select name="restaurant" id="restaurant-select">
+                        <option disabled selected>Restaurant</option>
+                        {{#each burgers}}
+                        <option value="{{ restaurant_id }}">{{ restaurant_name }} {{/each}}
+                    </select>
                 </div>
                 <button type="submit">Add Burger</button>
             </form>
         </div>
-        <div class="restaurant">
+        <div class="form restaurant">
             <form action="/api/restaurant" id="add-restaurant-form">
-                <input type="text" />
+                <div class="form-input">
+                    <label>Name:</label>
+                    <input name="name" type="text" />
+                </div>
+                <div class="form-input">
+                    <label>Address:</label>
+                    <input name="address" type="text" />
+                </div>
                 <button type="submit">Add Restaurant</button>
             </form>
         </div>
     </section>
     <h2>Current Burger List</h2>
-    {{#each burgers}}
-    <div class="burger">
-        <h3>{{ burger_name }} at {{ restaurant_name }}</h3>
-        <p>{{ address }}</p>
-        <button class="devour-burger" id="{{ burger_id }}" {{#if devoured }}disabled{{/if}}>Devour it!</button>
-        <br />
-    </div>
-    {{/each}}
+    <section id="burger-list">
+        {{#each burgers}}
+        <div class="burger">
+            <h3>{{ burger_name }} at {{ restaurant_name }}</h3>
+            <p>{{ address }}</p>
+            <button class="devour-burger" id="{{ burger_id }}" {{#if devoured }}disabled{{/if}}>Devour it!</button>
+            <br />
+        </div>
+        {{/each}}
+    </section>
 </section>

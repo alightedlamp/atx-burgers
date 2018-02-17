@@ -11,12 +11,12 @@ var burger = {
       orm.join(tableOneName, tableTwoName).then(data => resolve(data));
     });
   },
-  insertOne: function(tableName, values, cb) {
+  create: function(tableName, values, cb) {
     return new Promise((resolve, reject) => {
       orm.create(tableName, values).then(data => resolve(data));
     });
   },
-  updateOne: function(tableName, values, id, cb) {
+  update: function(tableName, values, id, cb) {
     return new Promise((resolve, reject) => {
       orm.update(tableName, values, id).then(data => resolve(data));
     });
