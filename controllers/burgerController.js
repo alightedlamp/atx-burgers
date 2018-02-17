@@ -6,8 +6,13 @@ const burger = require('../models/burger.js');
 router.get('/', (req, res) =>
   burger
     .join('burger', 'restaurant')
-    .then(data => {
-      res.render('index', { burgers: data });
+    .then(burgerData => {
+      burger.all('restaurant').then(restaurantData => {
+        res.render('index', {
+          burgers: burgerData,
+          restaurants: restaurantData
+        });
+      });
     })
     .catch(err => res.status(503).send('Error'))
 );
@@ -29,9 +34,23 @@ router.post('/api/:type', (req, res) =>
 
 router.put('/api/:type/:id', function(req, res) {
   burger
-    .update(req.params.type, req.body, req.params.id)
+    .update(req.params.type, req.body, parseInt(req.params.id))
     .then(result => {
       if (result.changedRows == 0) {
+        return res.status(404).end();
+      } else {
+        res.status(200).end();
+      }
+    })
+    .catch(err => res.status(503).send('Error'));
+});
+
+router.delete('/api/:type/:id', function(req, res) {
+  burger
+    .delete(req.params.type, parseInt(req.params.id))
+    .then(result => {
+      console.log(result);
+      if (result.affectedRows == 0) {
         return res.status(404).end();
       } else {
         res.status(200).end();

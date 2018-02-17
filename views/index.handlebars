@@ -1,54 +1,123 @@
-<section class="app">
-    <header>
-        <h1>ATX Burgers</h1>
-    </header>
-    <nav>
-        <ul>
-            <li>Home</li>
-            <li>Burgers</li>
-            <li>Restaurants</li>
-            <li>About</li>
-        </ul>
-    </nav>
-    <section class="add-items">
-        <div class="form burger">
-            <form id="add-burger-form">
-                <div class="form-input">
-                    <input name="name" type="text" />
-                </div>
-                <div class="form-input">
-                    <select name="restaurant" id="restaurant-select">
-                        <option disabled selected>Restaurant</option>
-                        {{#each burgers}}
-                        <option value="{{ restaurant_id }}">{{ restaurant_name }} {{/each}}
-                    </select>
-                </div>
-                <button type="submit">Add Burger</button>
-            </form>
-        </div>
-        <div class="form restaurant">
-            <form action="/api/restaurant" id="add-restaurant-form">
-                <div class="form-input">
-                    <label>Name:</label>
-                    <input name="name" type="text" />
-                </div>
-                <div class="form-input">
-                    <label>Address:</label>
-                    <input name="address" type="text" />
-                </div>
-                <button type="submit">Add Restaurant</button>
-            </form>
-        </div>
-    </section>
-    <h2>Current Burger List</h2>
-    <section id="burger-list">
-        {{#each burgers}}
-        <div class="burger">
-            <h3>{{ burger_name }} at {{ restaurant_name }}</h3>
-            <p>{{ address }}</p>
-            <button class="devour-burger" id="{{ burger_id }}" {{#if devoured }}disabled{{/if}}>Devour it!</button>
-            <br />
-        </div>
-        {{/each}}
-    </section>
+<section class="hero is-medium">
+    <div class="hero-img">
+        <img src="./assets/img/hero.png" />
+    </div>
+    <div class="hero-body">
+        <h1 class="title">Burger Town</h1>
+        <h2 class="subtite">Everyone loves burgers, especially those with cheese. Keep track of the burgers you've eaten, and those you want
+            to eat.</h2>
+    </div>
 </section>
+
+<!--
+<nav class="section">
+    <ul>
+        <li>Home</li>
+        <li>Burgers</li>
+        <li>Restaurants</li>
+        <li>About</li>
+    </ul>
+</nav>
+-->
+<section class="section add-items">
+    <div class="container columns">
+        <div class="column form burger">
+            <h2 class="subtitle">Add Burger</h2>
+            <form id="add-burger-form">
+                <div class="field">
+                    <div class="control">
+                        <label class="label">Burger Name:</label>
+                        <input class="input" name="name" type="text" required/>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <label class="label">Restaurant:</label>
+                        <div class="select">
+                            <select name="restaurant_id" id="restaurant-select" required>
+                                {{#each restaurants}}
+                                <option value="{{ id }}">{{ name }}</option>{{/each}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <input name="devoured" value="0" hidden/>
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-info" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="column form restaurant">
+            <h2 class="subtitle">Add Restaurant</h2>
+            <form action="/api/restaurant" id="add-restaurant-form">
+                <div class="field">
+                    <div class="control">
+                        <label class="label">Name:</label>
+                        <input class="input" name="name" type="text" required/>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <label class="label">Address:</label>
+                        <input class="input" name="address" type="text" required/>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-info" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="main-app">
+    <div class="container columns">
+        <div class="column" id="burgers-to-eat-list">
+            <h2 class="subtitle">Burgers to Eat</h2>
+            {{#each burgers}} {{#unless devoured }}
+            <div class="card burger">
+                <header class="card-header">
+                    <p class="card-header-title">{{ burger_name }}</p>
+                    <a href="#" class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </header>
+                <div class="card-content">
+                    <h4 class="subtitle">{{ restaurant_name }}</h4>
+                    <p>{{ address }}</p>
+                </div>
+                <footer class="card-footer">
+                    <a class="card-footer-item devour-burger" data-id="{{ burger_id }}">Devour it!</a>
+                    <a class="card-footer-item delete-burger" data-id="{{ burger_id }}">Delete</a>
+                </footer>
+            </div>
+            {{/unless}} {{/each}}
+        </div>
+        <div class="container column" id="burgers-devoured">
+            <h2 class="subtitle">Burgers Devoured</h2>
+            {{#each burgers}} {{#if devoured}}
+            <div class="card burger">
+                <header class="card-header">
+                    <p class="card-header-title">{{ burger_name }}</p>
+                </header>
+                <div class="card-content">
+                    <h4 class="subtitle">{{ restaurant_name }}</h4>
+                    <p>{{ address }}</p>
+                </div>
+            </div>
+            {{/if}} {{/each}}
+        </div>
+    </div>
+</section>
+
+<footer class="footer hero is-dark">
+    <section class="contaner content">
+        <h4 class="subtitle">Keep on chomping!</h4>
+    </section>
+</footer>

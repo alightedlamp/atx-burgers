@@ -1,0 +1,36 @@
+.hero {
+  background: rgb(233, 115, 60);
+  color: white;
+}
+.hero-img {
+  position: absolute;
+  left: -150px;
+  top: 25px;
+  margin-right: 100px;
+  width: 300px;
+  float: left;
+}
+.hero-img img {
+  width: 100%;
+}
+.hero-body {
+  z-index: 1;
+  margin-left: 175px;
+}
+.add-items {
+  background: rgb(219, 219, 219);
+}
+.card {
+  margin-top: 20px;
+}
+
+@media (max-width: 770px) {
+  .hero-img {
+    top: 10px;
+    left: -75px;
+    width: 150px;
+  }
+  .hero-body {
+    margin-left: 75px;
+  }
+}
