@@ -1,0 +1,28 @@
+{
+  "name": "burger-town",
+  "version": "1.0.0",
+  "description": "An app to track burgers you want to eat",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "method-override": "^2.3.10",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alightedlamp/atx-burgers.git"
+  },
+  "author": "Philip Harrell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alightedlamp/atx-burgers/issues"
+  },
+  "homepage": "https://github.com/alightedlamp/atx-burgers#readme"
+}

@@ -1,6 +1,6 @@
 # Burger Town
 
-Burger Town enables anyone to add a burger and corresponding restaurant they would like to eat. Data is stored in a MySQL database.
+Burger Town lets you track burgers you want to eat and the restaurants where you can eat them. Data is stored in a MySQL database.
 
 ## Objective
 
