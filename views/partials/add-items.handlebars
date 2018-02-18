@@ -1,0 +1,52 @@
+<div class="container columns">
+    <div class="column form burger">
+        <h2 class="subtitle">Add Burger</h2>
+        <form id="add-burger-form">
+            <div class="field">
+                <div class="control">
+                    <label class="label">Burger Name:</label>
+                    <input class="input" name="name" type="text" required/>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <label class="label">Restaurant:</label>
+                    <div class="select">
+                        <select name="restaurant_id" id="restaurant-select" required>
+                            {{#each restaurants}}
+                            <option value="{{ id }}">{{ name }}</option>{{/each}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <input name="devoured" value="0" hidden/>
+            <div class="field">
+                <div class="control">
+                    <button class="button is-info" type="submit">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="column form restaurant">
+        <h2 class="subtitle">Add Restaurant</h2>
+        <form action="/api/restaurant" id="add-restaurant-form">
+            <div class="field">
+                <div class="control">
+                    <label class="label">Name:</label>
+                    <input class="input" name="name" type="text" required/>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <label class="label">Address:</label>
+                    <input class="input" name="address" type="text" required/>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <button class="button is-info" type="submit">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

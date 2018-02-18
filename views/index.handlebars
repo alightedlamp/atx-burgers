@@ -20,101 +20,14 @@
 </nav>
 -->
 <section class="section add-items">
-    <div class="container columns">
-        <div class="column form burger">
-            <h2 class="subtitle">Add Burger</h2>
-            <form id="add-burger-form">
-                <div class="field">
-                    <div class="control">
-                        <label class="label">Burger Name:</label>
-                        <input class="input" name="name" type="text" required/>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="control">
-                        <label class="label">Restaurant:</label>
-                        <div class="select">
-                            <select name="restaurant_id" id="restaurant-select" required>
-                                {{#each restaurants}}
-                                <option value="{{ id }}">{{ name }}</option>{{/each}}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <input name="devoured" value="0" hidden/>
-                <div class="field">
-                    <div class="control">
-                        <button class="button is-info" type="submit">Add</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="column form restaurant">
-            <h2 class="subtitle">Add Restaurant</h2>
-            <form action="/api/restaurant" id="add-restaurant-form">
-                <div class="field">
-                    <div class="control">
-                        <label class="label">Name:</label>
-                        <input class="input" name="name" type="text" required/>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="control">
-                        <label class="label">Address:</label>
-                        <input class="input" name="address" type="text" required/>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="control">
-                        <button class="button is-info" type="submit">Add</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    {{> add-items}}
 </section>
 
+{{#if burgers}}
 <section class="section" id="main-app">
-    <div class="container columns">
-        <div class="column" id="burgers-to-eat-list">
-            <h2 class="subtitle">Burgers to Eat</h2>
-            {{#each burgers}} {{#unless devoured }}
-            <div class="card burger">
-                <header class="card-header">
-                    <p class="card-header-title">{{ burger_name }}</p>
-                    <a href="#" class="card-header-icon" aria-label="more options">
-                        <span class="icon">
-                            <i class="fas fa-angle-down" aria-hidden="true"></i>
-                        </span>
-                    </a>
-                </header>
-                <div class="card-content">
-                    <h4 class="subtitle">{{ restaurant_name }}</h4>
-                    <p>{{ address }}</p>
-                </div>
-                <footer class="card-footer">
-                    <a class="card-footer-item devour-burger" data-id="{{ burger_id }}">Devour it!</a>
-                    <a class="card-footer-item delete-burger" data-id="{{ burger_id }}">Delete</a>
-                </footer>
-            </div>
-            {{/unless}} {{/each}}
-        </div>
-        <div class="container column" id="burgers-devoured">
-            <h2 class="subtitle">Burgers Devoured</h2>
-            {{#each burgers}} {{#if devoured}}
-            <div class="card burger">
-                <header class="card-header">
-                    <p class="card-header-title">{{ burger_name }}</p>
-                </header>
-                <div class="card-content">
-                    <h4 class="subtitle">{{ restaurant_name }}</h4>
-                    <p>{{ address }}</p>
-                </div>
-            </div>
-            {{/if}} {{/each}}
-        </div>
-    </div>
+    {{> burger-list}}
 </section>
+{{/if}}
 
 <footer class="footer hero is-dark">
     <section class="contaner content">
