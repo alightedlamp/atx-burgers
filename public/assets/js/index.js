@@ -5,38 +5,44 @@ $(document).ready(function() {
       .map(w => w[0].toUpperCase() + w.slice(1).toLowerCase())
       .join(' ');
   };
-  // Title cases strings and converts to a consumable object
-  const massageData = function(data) {
+  const massageAndPurifyData = function(data) {
     return data.reduce((o, item) => {
       if (typeof item.value === 'string') {
         item.value = titleCase(item.value);
       }
-      o[item.name] = item.value;
+      o[item.name] = DOMPurify.sanitize(item.value).trim();
       return o;
     }, {});
   };
-  // Handle adding a new burger
+
   $('#add-burger-form').submit(function(e) {
     e.preventDefault();
-    const data = massageData($(this).serializeArray());
-    $.ajax({
-      url: '/api/burger',
-      type: 'POST',
-      data: data
-    }).done(data => location.reload());
+    const data = massageAndPurifyData($(this).serializeArray());
+    if (data.name) {
+      $.ajax({
+        url: '/api/burger',
+        type: 'POST',
+        data: data
+      }).done(data => location.reload());
+    } else {
+      console.log('Invalid input');
+    }
   });
 
-  // Handle adding a new restaurant
   $('#add-restaurant-form').submit(function(e) {
     e.preventDefault();
-    const data = massageData($(this).serializeArray());
-    $.ajax({
-      url: '/api/restaurant',
-      type: 'POST',
-      data: data
-    }).then(data => location.reload());
+    const data = massageAndPurifyData($(this).serializeArray());
+    if (data.name && data.address) {
+      $.ajax({
+        url: '/api/restaurant',
+        type: 'POST',
+        data: data
+      }).then(data => location.reload());
+    } else {
+      console.log('Invalid input');
+    }
   });
-  // Update a burger to devoured
+
   $('.devour-burger').on('click', function() {
     const id = $(this).data('id');
     $.ajax({
@@ -48,7 +54,7 @@ $(document).ready(function() {
       })
     }).done(response => location.reload());
   });
-  // Delete a burger
+
   $('.delete-burger').on('click', function() {
     const id = $(this).data('id');
     $.ajax({
