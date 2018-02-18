@@ -33,7 +33,7 @@ router.post('/api/:type', (req, res) =>
     .catch(err => res.status(503).send('Error'))
 );
 
-router.put('/api/:type/:id', function(req, res) {
+router.put('/api/:type/:id', (req, res) => {
   burger
     .update(req.params.type, req.body, parseInt(req.params.id))
     .then(result => {
@@ -46,7 +46,7 @@ router.put('/api/:type/:id', function(req, res) {
     .catch(err => res.status(503).send('Error'));
 });
 
-router.delete('/api/:type/:id', function(req, res) {
+router.delete('/api/:type/:id', (req, res) => {
   burger
     .delete(req.params.type, parseInt(req.params.id))
     .then(result => {
