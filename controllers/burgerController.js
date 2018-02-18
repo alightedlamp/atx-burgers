@@ -3,7 +3,7 @@ const router = express.Router();
 const burger = require('../models/burger.js');
 
 // Create all our routes and set up logic within those routes where required.
-router.get('/', (req, res) =>
+router.get('/', (req, res) => {
   console.log('Retrieving homepage');
   burger
     .join('burger', 'restaurant')
@@ -15,8 +15,8 @@ router.get('/', (req, res) =>
         });
       });
     })
-    .catch(err => res.status(503).send('Error'))
-);
+    .catch(err => res.status(503).send('Error'));
+});
 router.get('/api/all', (req, res) =>
   burger.join('burger', 'restaurant').then(data => res.json(data))
 );
