@@ -4,6 +4,7 @@ const burger = require('../models/burger.js');
 
 // Create all our routes and set up logic within those routes where required.
 router.get('/', (req, res) =>
+  console.log('Retrieving homepage');
   burger
     .join('burger', 'restaurant')
     .then(burgerData => {
